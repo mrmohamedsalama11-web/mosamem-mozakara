@@ -213,6 +213,14 @@ input[type=color]{height:42px;padding:3px;cursor:pointer}
 </style>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#174574">
+<script>
+/* تسجيل Service Worker مباشرة من داخل الصفحة، بما يتوافق مع GitHub Pages وPWABuilder. */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js', {scope: './'})
+    .then(reg => console.log('Service Worker registered:', reg.scope))
+    .catch(err => console.error('Service Worker registration failed:', err));
+}
+</script>
 </head>
 <body>
 <div class="app">
@@ -1193,13 +1201,7 @@ window.addEventListener('load',()=>{
   install();
 })();
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
-</script>
+
 </body>
 </html>
 <style>
